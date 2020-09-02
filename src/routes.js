@@ -1,6 +1,7 @@
 const express = require("express");
 const auth = require("./app/middlewares/auth");
 const UserController = require("./app/controllers/UserController");
+const AdressController = require("./app/controllers/AdressController");
 const AuthController = require("./app/controllers/AuthController");
 const CompanyController = require("./app/controllers/CompanyController");
 const EquipmentController = require("./app/controllers/EquipmentController");
@@ -38,5 +39,12 @@ routes.get("/maintenance/:id", auth, MaintenanceController.show);
 routes.post("/maintenance", auth, MaintenanceController.store);
 routes.put("/maintenance/:id", auth, MaintenanceController.update);
 routes.delete("/maintenance/:id", auth, MaintenanceController.destroy);
+
+// Adress
+routes.post("/adress", auth, AdressController.store);
+routes.get("/adress", auth, AdressController.index);
+routes.get("/adress/:id", auth, AdressController.show);
+routes.put("/adress/:id", auth, AdressController.update);
+routes.delete("/adress/:id", auth, AdressController.destroy);
 
 module.exports = routes;
