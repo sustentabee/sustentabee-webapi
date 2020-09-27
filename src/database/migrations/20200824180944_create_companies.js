@@ -1,18 +1,17 @@
 exports.up = function (knex) {
-  return knex.schema.createTable("companies", function (table) {
-    table.increments();
-    table.integer("adress_id").unsigned().notNullable();
-    table.string("name").notNullable();
-    table.string("status").notNullable();
-    table.string("cnpj").notNullable();
-    table.string("telefone").notNullable();
-    table.string("endereco").notNullable();
-    table.timestamps(true, true);
+    return knex.schema.createTable("companies", function (table) {
+        table.increments();
+        table.integer("user_id").unsigned();
+        table.string("name").notNullable();
+        table.string("status").defaultTo("active").notNullable();
+        table.string("document_number").nullable();
+        table.string("phone").nullable();
+        table.timestamps(true, true);
 
-    table.foreign("adress_id").references("addresses.id");
-  });
+        table.foreign("user_id").references("users.id");
+    });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable("companies");
+    return knex.schema.dropTable("companies");
 };
