@@ -2,6 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("maintenances", function (table) {
     table.increments();
     table.integer("equipment_id").unsigned().notNullable();
+    table.date("date").notNullable();
     table.text("description").notNullable();
     table.timestamps(true, true);
 

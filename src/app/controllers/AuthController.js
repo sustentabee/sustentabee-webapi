@@ -19,6 +19,17 @@ module.exports = {
             return res.status(400).json({ error: "Inactive account" });
         }
         return res.status(400).json({ error: "User not found" });
-    }
+    },
+
+    async selectCompany(req, res) {
+        const { user } = req.auth;
+        const { company_id } = req.body;
+        const company = await connection('companies').where('id', company_id).select('*').first();
+        if (company) {
+            const token = jwt.sign({ user: { id: user.id, name: user.name, company_id: company.id, company_name: company.name } }, process.env.SECRET_API_KEY);
+            return res.json({ token });
+        }
+        return res.status(400).json({ error: "Company not found." });
+    },
 
 }

@@ -18,6 +18,7 @@ routes.delete("/user/:id", auth, UserController.destroy);
 
 // Auth
 routes.post("/login", AuthController.login);
+routes.post("/select-company", auth, AuthController.selectCompany);
 
 // Company
 routes.get("/company", auth, CompanyController.index);
