@@ -6,6 +6,7 @@
   "author": "Gustavo Aldar <gustavoaldar@outlook.com>",
   "license": "MIT",
   "scripts": {
+    "prestart": "npx knex migrate:latest",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },

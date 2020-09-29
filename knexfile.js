@@ -1,52 +1,54 @@
-// Update with your config settings.
+require("dotenv/config");
 
 module.exports = {
-  development: {
-    client: "postgresql",
-    connection: {
-      database: "postgres",
-      user: "postgres",
-      password: "postgres",
-      port: 5432,
+    development: {
+        client: "postgresql",
+        connection: {
+            host: process.env.PG_HOST,
+            database: process.env.PG_DATABASE,
+            user: process.env.PG_USER,
+            password: process.env.PG_PASSWORD,
+            port: process.env.PG_PORT,
+            // ssl: false
+        },
+        pool: {
+            min: 2,
+            max: 10,
+        },
+        migrations: {
+            directory: "./src/database/migrations",
+        },
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      directory: "./src/database/migrations",
-    },
-  },
 
-  staging: {
-    client: "postgresql",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
+    staging: {
+        client: "postgresql",
+        connection: {
+            database: "my_db",
+            user: "username",
+            password: "password",
+        },
+        pool: {
+            min: 2,
+            max: 10,
+        },
+        migrations: {
+            tableName: "knex_migrations",
+        },
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: "knex_migrations",
-    },
-  },
 
-  production: {
-    client: "postgresql",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
+    production: {
+        client: "postgresql",
+        connection: {
+            database: "my_db",
+            user: "username",
+            password: "password",
+        },
+        pool: {
+            min: 2,
+            max: 10,
+        },
+        migrations: {
+            tableName: "knex_migrations",
+        },
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: "knex_migrations",
-    },
-  },
 };
