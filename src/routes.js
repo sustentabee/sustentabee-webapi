@@ -12,7 +12,7 @@ const DoorOpeningController = require("./app/controllers/DoorOpeningController")
 const routes = express.Router();
 
 // User
-routes.get("/user", UserController.index);
+routes.get("/user", auth, UserController.index);
 routes.get("/user/:id", auth, UserController.show);
 routes.post("/user", UserController.store);
 routes.put("/user/:id", auth, UserController.update);
@@ -63,5 +63,9 @@ routes.get("/door-opening/:id", DoorOpeningController.show);
 routes.post("/door-opening", DoorOpeningController.store);
 routes.put("/door-opening/:id", DoorOpeningController.update);
 routes.delete("/door-opening/:id", DoorOpeningController.destroy);
+
+routes.get("*", function (req, res) {
+    return res.status(200).json({ status: 404, error: "Route " + req.originalUrl + " doesn't exists." });
+});
 
 module.exports = routes;
