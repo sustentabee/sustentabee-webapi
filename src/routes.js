@@ -6,6 +6,8 @@ const AuthController = require("./app/controllers/AuthController");
 const CompanyController = require("./app/controllers/CompanyController");
 const EquipmentController = require("./app/controllers/EquipmentController");
 const MaintenanceController = require("./app/controllers/MaintenanceController");
+const MeasurementController = require("./app/controllers/MeasurementController");
+const DoorOpeningController = require("./app/controllers/DoorOpeningController");
 
 const routes = express.Router();
 
@@ -47,5 +49,19 @@ routes.get("/adress", auth, AdressController.index);
 routes.get("/adress/:id", auth, AdressController.show);
 routes.put("/adress/:id", auth, AdressController.update);
 routes.delete("/adress/:id", auth, AdressController.destroy);
+
+// Measurements
+routes.get("/measurement", MeasurementController.index);
+routes.get("/measurement/:id", MeasurementController.show);
+routes.post("/measurement", MeasurementController.store);
+routes.put("/measurement/:id", MeasurementController.update);
+routes.delete("/measurement/:id", MeasurementController.destroy);
+
+// Door Opening
+routes.get("/door-opening", DoorOpeningController.index);
+routes.get("/door-opening/:id", DoorOpeningController.show);
+routes.post("/door-opening", DoorOpeningController.store);
+routes.put("/door-opening/:id", DoorOpeningController.update);
+routes.delete("/door-opening/:id", DoorOpeningController.destroy);
 
 module.exports = routes;
