@@ -40,14 +40,18 @@ module.exports = {
         }
     },
     async destroy(req, res) {
-        const { id } = req.params;
-        const equipment = await connection("equipments")
-            .where("id", id)
-            .select("id")
-            .first();
-        if (equipment) {
-            await connection("equipments").where("id", id).delete();
+        try {
+            const { id } = req.params;
+            const equipment = await connection("equipments")
+                .where("id", id)
+                .select("id")
+                .first();
+            if (equipment) {
+                await connection("equipments").where("id", equipment.id).delete();
+            }
+            return res.status(204).send();
+        } catch (error) {
+            return res.status(400).json({ error });
         }
-        return res.status(204).send();
     },
 };
