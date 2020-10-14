@@ -3,7 +3,8 @@ const connection = require("../../database/connection");
 module.exports = {
     async index(req, res) {
         try {
-            const measurements = await connection("measurements").select("*");
+            const { user } = req.auth;
+            const measurements = await connection("measurements").innerJoin("equipments", "equipments.serial", "measurements.sensorSerialNo").select("measurements.*", "equipments.name", "equipments.brand", "equipments.model").where("equipments.company_id", "=", user.company_id).orderBy("created_at", "desc");
             return res.json(measurements);
         } catch (error) {
             return res.status(400).json({ error });

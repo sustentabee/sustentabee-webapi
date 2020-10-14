@@ -51,11 +51,11 @@ routes.put("/adress/:id", auth, AdressController.update);
 routes.delete("/adress/:id", auth, AdressController.destroy);
 
 // Measurements
-routes.get("/measurement", MeasurementController.index);
-routes.get("/measurement/:id", MeasurementController.show);
+routes.get("/measurement", auth, MeasurementController.index);
+routes.get("/measurement/:id", auth, MeasurementController.show);
 routes.post("/measurement", MeasurementController.store);
-routes.put("/measurement/:id", MeasurementController.update);
-routes.delete("/measurement/:id", MeasurementController.destroy);
+routes.put("/measurement/:id", auth, MeasurementController.update);
+routes.delete("/measurement/:id",auth, MeasurementController.destroy);
 
 // Door Opening
 routes.get("/door-opening", DoorOpeningController.index);
