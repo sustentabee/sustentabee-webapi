@@ -15,7 +15,8 @@ module.exports = {
                     "measurements.*",
                     "equipments.name",
                     "equipments.brand",
-                    "equipments.model"
+                    "equipments.model",
+                    "equipments.id AS equipment_id",
                 )
                 .where("equipments.company_id", "=", user.company_id)
                 .orderBy("created_at", "desc");
