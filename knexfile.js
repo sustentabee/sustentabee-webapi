@@ -9,7 +9,7 @@ module.exports = {
             user: process.env.PG_USER,
             password: process.env.PG_PASSWORD,
             port: process.env.PG_PORT,
-            //ssl: { rejectUnauthorized: false }
+            ssl: { rejectUnauthorized: false }
         },
         pool: {
             min: 2,
