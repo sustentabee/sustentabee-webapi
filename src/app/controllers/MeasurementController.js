@@ -26,12 +26,28 @@ module.exports = {
         }
     },
     async show(req, res) {
-        const { id } = req.params;
-        const measurement = await connection("measurements")
-            .where("id", id)
-            .select("*")
-            .first();
-        return res.json(measurement);
+        try {
+            const { user } = req.auth;
+            const { id } = req.params;
+            const measurements = await connection("measurements")
+                .innerJoin(
+                    "equipments",
+                    "equipments.serial",
+                    "measurements.sensorSerialNo"
+                )
+                .select(
+                    "measurements.*",
+                    "equipments.name",
+                    "equipments.brand",
+                    "equipments.model",
+                    "equipments.id AS equipment_id",
+                )
+                .where("equipments.company_id", "=", user.company_id)
+                .where("equipments.id", "=", id);
+            return res.json(measurements);
+        } catch (error) {
+            return res.status(400).json({ error });
+        }
     },
     async store(req, res) {
         try {

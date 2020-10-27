@@ -11,12 +11,14 @@ module.exports = {
         }
     },
     async show(req, res) {
-        const { id } = req.params;
-        const equipment = await connection("equipments")
-            .where("id", id)
-            .select("*")
-            .first();
-        return res.json(equipment);
+        try {
+            const { user } = req.auth;
+            const { id } = req.params;
+            const equipment = await connection("equipments").select("*").where("company_id", user.company_id).where("id", id).first();
+            return res.json(equipment);
+        } catch (error) {
+            return res.status(400).json({ error });
+        }
     },
     async store(req, res) {
         try {
