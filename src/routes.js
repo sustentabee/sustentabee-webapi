@@ -67,6 +67,7 @@ routes.delete("/door-opening/:id", DoorOpeningController.destroy);
 
 // Notification
 routes.get("/notification", auth, NotificationController.index);
+routes.post("/notification", NotificationController.store);
 
 routes.get("*", function (req, res) {
     return res.status(200).json({ status: 404, error: "Route " + req.originalUrl + " doesn't exists." });

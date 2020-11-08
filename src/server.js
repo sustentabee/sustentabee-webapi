@@ -2,6 +2,7 @@ const express = require("express");
 const routes = require("./routes");
 const cors = require("cors");
 const helmet = require("helmet");
+require("./services/notification");
 require("dotenv/config");
 
 const app = express();

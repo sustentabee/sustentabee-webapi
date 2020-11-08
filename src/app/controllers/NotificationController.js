@@ -13,5 +13,14 @@ module.exports = {
         } catch (error) {
             return res.status(400).json({ error });
         }
+    },
+    async store(req, res) {
+        const { serial, title, type } = req.body;
+        const equipment = await connection("equipments").select("*").where("serial", "=", serial).first();
+        if (equipment) {
+            await connection("notifications").insert(req.body);
+            req.io.emit("notification", { serial, title, type, equipment_id: equipment.id, brand: equipment.brand, model: equipment.model, newAlert: true });
+        }
+        return res.send();
     }
 };
