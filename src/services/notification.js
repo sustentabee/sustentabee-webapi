@@ -13,7 +13,7 @@ const DoorOpening = new CronJob('*/10 * * * * *', async () => {
                     const d1 = moment(new Date());
                     const d2 = moment(door_openings.created_at);
                     if (d1.diff(d2) > 9000) {
-                        await axios.post(process.env.APP_URL + "/notification", { serial: door_openings.sensorSerialNo, title: "Porta aberta mais que 20 segundos", type: "warning" }).then(() => { }).catch(() => { });
+                        await axios.post(process.env.APP_URL + "/notification", { serial: door_openings.sensorSerialNo, title: "Porta aberta mais que 15 segundos", type: "warning" }).then(() => { }).catch(() => { });
                         await connection("door_openings").where("id", door_openings.id).update({ notification: true });
                     }
                 }
