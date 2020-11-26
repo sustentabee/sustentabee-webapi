@@ -9,6 +9,7 @@ const MaintenanceController = require("./app/controllers/MaintenanceController")
 const MeasurementController = require("./app/controllers/MeasurementController");
 const DoorOpeningController = require("./app/controllers/DoorOpeningController");
 const NotificationController = require("./app/controllers/NotificationController");
+const CompanySpectrumController = require("./app/controllers/CompanySpectrumController");
 
 const routes = express.Router();
 
@@ -68,6 +69,13 @@ routes.delete("/door-opening/:id", DoorOpeningController.destroy);
 // Notification
 routes.get("/notification", auth, NotificationController.index);
 routes.post("/notification", NotificationController.store);
+
+// Company Spectrum
+routes.get("/company-spectrum", auth, CompanySpectrumController.index);
+routes.get("/company-spectrum/:id", auth, CompanySpectrumController.show);
+routes.post("/company-spectrum", auth, CompanySpectrumController.store);
+routes.put("/company-spectrum/:id", auth, CompanySpectrumController.update);
+routes.delete("/company-spectrum/:id", auth, CompanySpectrumController.destroy);
 
 routes.get("*", function (req, res) {
     return res.status(200).json({ status: 404, error: "Route " + req.originalUrl + " doesn't exists." });
